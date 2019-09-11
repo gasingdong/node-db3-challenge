@@ -35,10 +35,22 @@ const update = (changes, id) => {
     });
 };
 
+const remove = id => {
+  return findById(id)
+    .then(res =>
+      db('schemes')
+        .where({ id })
+        .del()
+        .then(() => res)
+    )
+    .catch(() => null);
+};
+
 module.exports = {
   find,
   findById,
   findSteps,
   add,
   update,
+  remove,
 };
