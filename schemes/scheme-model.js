@@ -18,8 +18,17 @@ const findSteps = id => {
     .orderBy('step_number');
 };
 
+const add = scheme => {
+  return db('schemes')
+    .insert(scheme)
+    .then(ids => {
+      return findById(ids[0]);
+    });
+};
+
 module.exports = {
   find,
   findById,
   findSteps,
+  add,
 };
