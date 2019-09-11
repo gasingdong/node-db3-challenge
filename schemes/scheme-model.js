@@ -46,6 +46,20 @@ const remove = id => {
     .catch(() => null);
 };
 
+// eslint-disable-next-line camelcase
+const addStep = (step, scheme_id) => {
+  return db('steps')
+    .insert({
+      ...step,
+      scheme_id,
+    })
+    .then(ids => {
+      return db('steps')
+        .where({ id: ids[0] })
+        .first();
+    });
+};
+
 module.exports = {
   find,
   findById,
@@ -53,4 +67,5 @@ module.exports = {
   add,
   update,
   remove,
+  addStep,
 };
